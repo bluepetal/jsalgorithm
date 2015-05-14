@@ -11,7 +11,7 @@ var levelOrder = function(root) {
   }
 
   var res = [],
-      curItems = [],
+      curLevel = [],
       queue = [root, '#'],
       cur;
 
@@ -20,12 +20,12 @@ var levelOrder = function(root) {
   while (queue.length > 1) {
     cur = queue.shift();
     if (cur === '#') {
-      res.push(curItems);
-      curItems = [];
+      res.push(curLevel);
+      curLevel = [];
       queue.push('#');
     } else {
 
-      curItems.push(cur.val);
+      curLevel.push(cur.val);
       if (cur.left) {
         queue.push(cur.left);
       }
@@ -35,7 +35,7 @@ var levelOrder = function(root) {
       }
     }
   }
-  res.push(curItems);
+  res.push(curLevel);
   return res
 };
 
