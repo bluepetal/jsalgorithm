@@ -6,17 +6,22 @@ var buildTree = require('./building').buildTree;
  * @return {number}
  */
 var minDepth = function(root) {
-  return (function recur(node) {
-    if (!node) {
-      return 0;
-    } else if (node.left && !node.right) {
-      return recur(node.left) + 1;
-    } else if (!node.left && node.right) {
-      return recur(node.right) + 1;
-    } else {
-      return Math.min(recur(node.left), recur(node.right)) + 1;
+  
+  if (!root) {
+    return 0;
+  }
+
+  var lmin = minDepth(root.left);
+  var rmin = minDepth(root.right);
+      
+  if (lmin == 0 && rmin != 0) {
+      return rmin + 1;
+  } else if (lmin != 0 && rmin == 0) {
+      return lmin + 1;
+  } else {
+      return Math.min(lmin, rmin) + 1;
     }
-  }(root));
+ 
 };
 
 var t = buildTree('1,2');
